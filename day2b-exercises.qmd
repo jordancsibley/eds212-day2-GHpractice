@@ -1,0 +1,90 @@
+---
+title: "Day 2b Exercises"
+author: "Jordan"
+format: html
+editor: visual
+---
+
+
+```{r}
+#load packages 
+library(tidyverse)
+
+#define function ----
+
+# Shortcut to build this function is typing out 3 * x^2 + 4, highlight it, then hold control option x to name the function. 
+
+eq1 <- function(x) {
+  3 * x^2 + 4 
+}
+
+#create a data frame to evaluate our function
+my_data_range <- data.frame(x = c(1, 100))
+
+# plot our function as a continuous curve over our specified range of values in our df
+ggplot(data = my_data_range, aes(x = x))+
+  geom_function(fun = eq1)
+```
+
+
+
+```{r}
+# define a new function ----
+
+eq2 <- function(x) {
+  2.4 - (5 * x^3) + (2.1 * x^2)
+}
+
+#data frame from -50 to 50 
+
+my_data_range2 <- data.frame(x = c(-50, 50))
+
+#plotting our function using ggplot 
+ggplot(data = my_data_range2, aes(x = x))+
+  geom_function(fun = eq2)
+
+# Alternatively could have written this as 
+#ggplot(data = data.frame(x = c(-50, 50)), aes(x=x)).... You would do it this way if you didn't first create the data frame. Instead it is built in to the ggplot. 
+
+```
+
+
+```{r}
+# Create a new function C(t) ----
+ct <- function(t) {
+  t^3
+}
+
+# Find the derivative of C(t)
+dc_dt<- D(expr = expression(t^3), name = "t")
+dc_dt # 3 * t^2
+
+# Store the derivative as a function 
+dc_dt_fun <- function(t) {
+  3 * t^2
+}
+
+# Data frame of values ----
+my_data_range<- data.frame(t = c(-5,5))
+
+# plot our function C(t)
+ggplot(data = my_data_range, aes(x = t)) +
+  geom_function(fun = ct, color = "red") +
+  geom_function(fun = dc_dt_fun, color = "blue")
+  
+```
+
+
+```{r}
+# Partial derivatives 
+
+f_xyz<- expression(2 * x * y - 3 * x^2 * z^3)
+
+# partial with respect to x ----
+# The name argument become important here when you have three different variables. 
+df_dx<- D(expr = f_xyz, name = "x")
+df_dx
+```
+
+
+
